@@ -12,7 +12,10 @@ namespace MyBotCSharp.Test
         [TestMethod]
         public void TestMethod1()
         {
-            Assert.Fail("TDD begins with a failing test.");
+            int expected = 1;
+            int actual = 1;
+
+            Assert.AreEqual(expected, actual, "Test harness is proven to be functioning, but we are in big trouble if this test fails.");
         }
     }
 }
