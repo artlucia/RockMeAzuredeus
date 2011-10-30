@@ -33,7 +33,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Compete.Bot">
+      <HintPath>..\ref\Compete.Bot.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Moq">
+      <HintPath>..\ref\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="RockPaperScissorsPro">
+      <HintPath>..\ref\RockPaperScissorsPro.dll</HintPath>
+    </Reference>
+    <Reference Include="RockPaperScissorsPro.RPA">
+      <HintPath>..\ref\RockPaperScissorsPro.RPA.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -45,8 +57,15 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyBotTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyBotCSharp\MyBotCSharp.csproj">
+      <Project>{FF8D7D58-A9B6-4537-928F-A411A7DB0109}</Project>
+      <Name>MyBotCSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

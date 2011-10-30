@@ -1,4 +1,12 @@
 RockMeAzuredeus is a public play on the Rock Paper Azure bot challenge.
 
 Some references are not going to be checked in to conserve project space.
-These references are available from http://www.rockpaperazure.com if needed.
+These references are available from http://www.rockpaperazure.com if needed:
+   ref/Compete.Bot.dll
+   ref/RockPaperScissorsPro.dll
+   ref/RockPaperScissorsPro.RPA.dll
+   ref/RockPaperScissorsPro.RPA.XML
+These references are available from http://code.google.com/p/moq if needed:
+   ref/Moq.dll
+   ref/Moq.pdb
+   ref/Moq.xml
