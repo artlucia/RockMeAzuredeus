@@ -76,5 +76,31 @@ namespace MyBotCSharp.Test
             Move actual = target.MakeMove(testPlayer, opponent, GameRules.Default);
             Assert.IsNotNull(actual, "This test expected a move to be made.");
         }
+
+        [TestMethod()]
+        public void TestWhenSpecifyingCycleMode_ThenFirstMoveIsRock()
+        {
+            var target = new MyBot();
+            target.Mode = MoveMode.Cycle;
+            var testPlayer = new Player("Test", target);
+
+            IPlayer opponent = new Player("Opponent", new MyBot());
+            Move expected = Moves.Rock;
+            Move actual = target.MakeMove(testPlayer, opponent, GameRules.Default);
+            Assert.AreEqual(expected, actual, "Cycle always starts with Rock.");
+        }
+
+        [TestMethod()]
+        public void TestWhenSpecifyingBigBangMode_ThenFirstMoveIsDynamite()
+        {
+            var target = new MyBot();
+            target.Mode = MoveMode.BigBang;
+            var testPlayer = new Player("Test", target);
+
+            IPlayer opponent = new Player("Opponent", new MyBot());
+            Move expected = Moves.Dynamite;
+            Move actual = target.MakeMove(testPlayer, opponent, GameRules.Default);
+            Assert.AreEqual(expected, actual, "Big Bang always starts with Dynamite.");
+        }
     }
 }

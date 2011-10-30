@@ -42,6 +42,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MoveMode.cs" />
     <Compile Include="MyBot.cs" />
     <Compile Include="MyBotFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
