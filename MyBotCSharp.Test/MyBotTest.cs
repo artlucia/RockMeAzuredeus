@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RockPaperAzure;
 using RockPaperScissorsPro;
+using System;
 
 namespace MyBotCSharp.Test
 {
@@ -80,7 +81,7 @@ namespace MyBotCSharp.Test
         [TestMethod()]
         public void TestWhenSpecifyingCycleMode_ThenFirstMoveIsRock()
         {
-            var target = new MyBot();
+            var target = new MyBot_Accessor();
             target.Mode = MoveMode.Cycle;
             var testPlayer = new Player("Test", target);
 
@@ -93,7 +94,7 @@ namespace MyBotCSharp.Test
         [TestMethod()]
         public void TestWhenSpecifyingBigBangMode_ThenFirstMoveIsDynamite()
         {
-            var target = new MyBot();
+            var target = new MyBot_Accessor();
             target.Mode = MoveMode.BigBang;
             var testPlayer = new Player("Test", target);
 

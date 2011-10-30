@@ -5,7 +5,7 @@ namespace RockPaperAzure
 {
     public class MyBot : IRockPaperScissorsBot
     {
-        public MoveMode Mode { get; set; }
+        private MoveMode Mode { get; set; }
 
         public Move MakeMove(IPlayer you, IPlayer opponent, GameRules rules)
         {
