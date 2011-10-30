@@ -6,6 +6,7 @@ namespace RockPaperAzure
     public class MyBot : IRockPaperScissorsBot
     {
         private MoveMode Mode = MoveMode.RockMeAzuredeus;
+        private MoveHistory History = new MoveHistory();
 
         public Move MakeMove(IPlayer you, IPlayer opponent, GameRules rules)
         {
@@ -32,6 +33,7 @@ namespace RockPaperAzure
 
         private Move MakeYourMove(IPlayer you, IPlayer opponent, GameRules rules)
         {
+            History.StoreMoves(you, opponent);
             return you.GetRandomDynamiteMove();
         }
 
