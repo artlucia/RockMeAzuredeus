@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameTest.cs" />
+    <Compile Include="Mocks\MockGameRules.cs" />
+    <Compile Include="MyBotExtensionsTest.cs" />
     <Compile Include="MyBotTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTest1.cs" />

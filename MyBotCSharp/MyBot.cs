@@ -5,7 +5,7 @@ namespace RockPaperAzure
 {
     public class MyBot : IRockPaperScissorsBot
     {
-        private MoveMode Mode { get; set; }
+        private MoveMode Mode = MoveMode.RockMeAzuredeus;
 
         public Move MakeMove(IPlayer you, IPlayer opponent, GameRules rules)
         {
@@ -13,6 +13,9 @@ namespace RockPaperAzure
 
             switch (Mode)
             {
+                case MoveMode.Random:
+                    resultingMove = MakeRandomMove(you, opponent, rules);
+                    break;
                 case MoveMode.Cycle:
                     resultingMove = MakeCycleMove(you, opponent, rules);
                     break;
@@ -20,11 +23,16 @@ namespace RockPaperAzure
                     resultingMove = MakeBigBangMove(you, opponent, rules);
                     break;
                 default:
-                    resultingMove = MakeRandomMove(you, opponent, rules);
+                    resultingMove = MakeYourMove(you, opponent, rules);
                     break;
             }
 
             return resultingMove;
+        }
+
+        private Move MakeYourMove(IPlayer you, IPlayer opponent, GameRules rules)
+        {
+            return you.GetRandomDynamiteMove();
         }
 
         // Random sample implementation

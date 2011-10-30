@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="MoveMode.cs" />
     <Compile Include="MyBot.cs" />
+    <Compile Include="MyBot.Helper.cs" />
     <Compile Include="MyBotFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
