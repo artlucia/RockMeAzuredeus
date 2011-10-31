@@ -1,8 +1,9 @@
-﻿using RockPaperAzure;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using RockPaperScissorsPro;
 using MyBotCSharp.Test.Mocks;
+using RockPaperAzure;
+using RockPaperScissorsPro;
 
 namespace MyBotCSharp.Test
 {
@@ -107,6 +108,26 @@ namespace MyBotCSharp.Test
             Assert.IsTrue(numberOfTimesDynamiteWasReturned > 0, "No dynamites thrown, not very random.");
             //To see the following output, view the test result details.
             Console.WriteLine("Actual dynamite thrown out of {0} was {1}.", maxAttempts, numberOfTimesDynamiteWasReturned);
+        }
+
+        /// <summary>
+        ///A test for ToInitialString
+        ///</summary>
+        [TestMethod()]
+        public void ToInitialStringTest()
+        {
+            List<Move> list = new List<Move>();
+            list.Add(Moves.WaterBalloon);
+            list.Add(Moves.Scissors);
+            list.Add(Moves.Rock);
+            list.Add(Moves.Paper);
+            list.Add(Moves.Paper);
+            list.Add(Moves.Paper);
+            list.Add(Moves.Dynamite);
+
+            string expected = "WSRPPPD";
+            string actual = list.ToInitialString();
+            Assert.AreEqual(expected, actual, "ToInitialString is not setting output as expected.");
         }
     }
 }

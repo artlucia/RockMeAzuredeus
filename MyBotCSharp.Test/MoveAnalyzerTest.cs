@@ -5,11 +5,11 @@ using RockPaperScissorsPro;
 namespace MyBotCSharp.Test
 {
     /// <summary>
-    ///This is a test class for MoveHistoryTest and is intended
-    ///to contain all MoveHistoryTest Unit Tests
+    ///This is a test class for MoveAnalyzerTest and is intended
+    ///to contain all MoveAnalyzerTest Unit Tests
     ///</summary>
     [TestClass()]
-    public class MoveHistoryTest
+    public class MoveAnalyzerTest
     {
         #region TestContext and additional test attributes
         private TestContext testContextInstance;
@@ -63,42 +63,41 @@ namespace MyBotCSharp.Test
         #endregion
 
         /// <summary>
-        ///A test for StoreMoves
+        ///A test for Analyze
         ///</summary>
         [TestMethod()]
-        public void TestWhenStoringMovesBeforeMovesAreMade_ThenNothingIsStored()
+        public void TestWhenAnalysisHasNoHistory_ThenConfidenceIsVeryUnconfident()
         {
-            var target = new MoveHistory_Accessor();
-            IPlayer you = new Player("Test", new MyBot());
-            IPlayer opponent = new Player("Opponent", new MyBot());
+            var history = new MoveHistory_Accessor();
+            var target = new MoveAnalyzer_Accessor(history);
+            Player you = new Player("Test", new MyBot());
+            you.Reset(GameRules.Default);
 
-            target.StoreMoves(you, opponent);
-            int expected = 0;
-            int actual = target.OpponentMoveHistory.Count;
-            Assert.AreEqual(expected, actual, "No opponent move should have been stored as no move was made yet.");
-            actual = target.YourMoveHistory.Count;
-            Assert.AreEqual(expected, actual, "No move for you should have been stored as no move was made yet.");
+            target.Analyze(you);
+            Confidence expected = Confidence.VeryUnconfident;
+            Confidence actual = target.CurrentConfidence;
+            Assert.AreEqual(expected, actual, "Odd that there is any confidence when there is no history.");
         }
 
-        /// <summary>
-        ///A test for StoreMoves
-        ///</summary>
         [TestMethod()]
-        public void TestWhenStoringMovesAfterMovesAreMade_ThenMovesAreStored()
+        public void TestWhenAnalysisEncountersARepeatedMove_ThenConfidenceIsVeryConfidentAndBestGuessIsDetermined()
         {
-            var target = new MoveHistory_Accessor();
+            var history = new MoveHistory_Accessor();
+            var target = new MoveAnalyzer_Accessor(history);
             Player you = new Player("Test", new MyBot());
-            you.SetLastMove(new PlayerMove(you, Moves.Rock));
-            Player opponent = new Player("Opponent", new MyBot());
-            opponent.SetLastMove(new PlayerMove(opponent, Moves.WaterBalloon));
+            you.Reset(GameRules.Default);
 
-            target.StoreMoves(you, opponent);
-            Move expected = Moves.WaterBalloon;
-            Move actual = target.OpponentMoveHistory[0];
-            Assert.AreEqual(expected, actual, "Opponent move was not saved as expected.");
-            expected = Moves.Rock;
-            actual = target.YourMoveHistory[0];
-            Assert.AreEqual(expected, actual, "Your move was not saved as expected.");
+            history.OpponentMoveHistory.Add(Moves.Dynamite);
+            history.OpponentMoveHistory.Add(Moves.Dynamite);
+            history.OpponentMoveHistory.Add(Moves.Dynamite);
+
+            target.Analyze(you);
+            Confidence expected = Confidence.VeryConfident;
+            Confidence actual = target.CurrentConfidence;
+            Assert.AreEqual(expected, actual, "Confidence after the DDD pattern is not as expected.");
+            Move expectedMove = Moves.WaterBalloon;
+            Move actualMove = target.BestGuess;
+            Assert.AreEqual(expectedMove, actualMove, "Best guess after the DDD pattern is not as expected.");
         }
     }
 }

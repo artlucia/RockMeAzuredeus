@@ -1,5 +1,5 @@
-﻿using RockPaperScissorsPro;
-using System;
+﻿using System;
+using RockPaperScissorsPro;
 
 namespace RockPaperAzure
 {
@@ -7,6 +7,12 @@ namespace RockPaperAzure
     {
         private MoveMode Mode = MoveMode.RockMeAzuredeus;
         private MoveHistory History = new MoveHistory();
+        private MoveAnalyzer Analyzer = null;
+
+        public MyBot()
+        {
+            this.Analyzer = new MoveAnalyzer(History);
+        }
 
         public Move MakeMove(IPlayer you, IPlayer opponent, GameRules rules)
         {
@@ -33,8 +39,24 @@ namespace RockPaperAzure
 
         private Move MakeYourMove(IPlayer you, IPlayer opponent, GameRules rules)
         {
+            Move yourMove = null;
             History.StoreMoves(you, opponent);
-            return you.GetRandomDynamiteMove();
+            Analyzer.Analyze(you);
+
+            if (Analyzer.CurrentConfidence.Equals(Confidence.VeryConfident))
+                yourMove = Analyzer.BestGuess;
+            else
+                yourMove = you.GetRandomDynamiteMove();
+
+            if (yourMove.Equals(Moves.Dynamite)) yourMove = you.GetDynamiteMove();
+
+            if (you.Log != null)
+                you.Log.AppendLine(String.Format("  BG: {0} and CC: {1} with {2} dynamite remaining.",
+                    Analyzer.BestGuess.ToInitialString(),
+                    Analyzer.CurrentConfidence,
+                    you.DynamiteRemaining));
+
+            return yourMove;
         }
 
         // Random sample implementation

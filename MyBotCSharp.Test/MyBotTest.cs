@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RockPaperAzure;
 using RockPaperScissorsPro;
-using System;
 
 namespace MyBotCSharp.Test
 {
