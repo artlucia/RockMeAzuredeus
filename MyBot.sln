@@ -44,7 +44,6 @@ Global
 		{62213C30-E868-4588-9611-2DD1EE20C081}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62213C30-E868-4588-9611-2DD1EE20C081}.Release|Any CPU.Build.0 = Release|Any CPU
 		{62213C30-E868-4588-9611-2DD1EE20C081}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{62213C30-E868-4588-9611-2DD1EE20C081}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{62213C30-E868-4588-9611-2DD1EE20C081}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
