@@ -40,21 +40,28 @@ namespace RockPaperAzure
         private Move MakeYourMove(IPlayer you, IPlayer opponent, GameRules rules)
         {
             Move yourMove = null;
-            History.StoreMoves(you, opponent);
-            Analyzer.Analyze(you);
+            try
+            {
+                History.StoreMoves(you, opponent);
+                Analyzer.Analyze(you);
 
-            if (Analyzer.CurrentConfidence.Equals(Confidence.VeryConfident))
-                yourMove = Analyzer.BestGuess;
-            else
+                if (Analyzer.CurrentConfidence.Equals(Confidence.VeryConfident))
+                    yourMove = Analyzer.BestGuess;
+                else
+                    yourMove = you.GetRandomDynamiteMove();
+            }
+            catch (Exception e)
+            {
+                you.LogError(e);
                 yourMove = you.GetRandomDynamiteMove();
+            }
 
             if (yourMove.Equals(Moves.Dynamite)) yourMove = you.GetDynamiteMove();
 
-            if (you.Log != null)
-                you.Log.AppendLine(String.Format("  BG: {0} and CC: {1} with {2} dynamite remaining.",
-                    Analyzer.BestGuess.ToInitialString(),
-                    Analyzer.CurrentConfidence,
-                    you.DynamiteRemaining));
+            you.LogLine("  BG: {0} and CC: {1} with {2} dynamite remaining.",
+                Analyzer.BestGuess.ToInitialString(),
+                Analyzer.CurrentConfidence,
+                you.DynamiteRemaining);
 
             return yourMove;
         }

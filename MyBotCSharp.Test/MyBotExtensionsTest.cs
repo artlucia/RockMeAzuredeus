@@ -129,5 +129,63 @@ namespace MyBotCSharp.Test
             string actual = list.ToInitialString();
             Assert.AreEqual(expected, actual, "ToInitialString is not setting output as expected.");
         }
+
+        /// <summary>
+        ///A test for LogLine
+        ///</summary>
+        [TestMethod()]
+        public void TestWhenLoggingWithoutArgs_ThenLogIsWrittenToWithoutException()
+        {
+            var you = new Player("Test", new MyBot());
+            using (var mock = new MockPlayer()
+            {
+                Log = new GameLog(you, new Player("Opponent", new MyBot()))
+            })
+            {
+                var player = mock.GetPlayer(you);
+                string message = "Test";
+                MyBotExtensions.LogLine(player, message);
+                Assert.IsNotNull(player.Log, "Could not have logged if the log object is not instantiated");
+            }
+        }
+
+        /// <summary>
+        ///A test for LogLine
+        ///</summary>
+        [TestMethod()]
+        public void TestWhenLoggingWithArgs_ThenLogIsWrittenToWithoutException()
+        {
+            var you = new Player("Test", new MyBot());
+            using (var mock = new MockPlayer()
+            {
+                Log = new GameLog(you, new Player("Opponent", new MyBot()))
+            })
+            {
+                var player = mock.GetPlayer(you);
+                string message = "Test {0} {1}";
+                MyBotExtensions.LogLine(player, message, "1", "2");
+                Assert.IsNotNull(player.Log, "Could not have logged if the log object is not instantiated");
+            }
+        }
+
+        /// <summary>
+        ///A test for LogError
+        ///</summary>
+        [TestMethod()]
+        public void TestWhenLoggingErrorWithArgs_ThenLogIsWrittenToWithoutException()
+        {
+            var you = new Player("Test", new MyBot());
+            using (var mock = new MockPlayer()
+            {
+                Log = new GameLog(you, new Player("Opponent", new MyBot()))
+            })
+            {
+                var player = mock.GetPlayer(you);
+                Exception e = new Exception("Test exception");
+                string message = "Test";
+                player.LogError(e, message);
+                Assert.IsNotNull(player.Log, "Could not have logged if the log object is not instantiated");
+            }
+        }
     }
 }

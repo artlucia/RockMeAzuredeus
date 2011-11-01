@@ -24,6 +24,25 @@ namespace RockPaperAzure
             return Moves.GetRandomMove().GetWinningMove().GetWinningMove();
         }
 
+        public static void LogError(this IPlayer you, Exception e, string message = null)
+        {
+            string logMessage = "ERROR";
+            if (!String.IsNullOrWhiteSpace(message))
+                logMessage = String.Concat(logMessage, " - ", message);
+            logMessage += ": {0}";
+            you.LogLine(logMessage, e);
+        }
+
+        public static void LogLine(this IPlayer you, string message, params object[] args)
+        {
+            if (you.Log == null) return;
+
+            if (args == null)
+                you.Log.AppendLine(message);
+            else
+                you.Log.AppendLine(String.Format(message, args));
+        }
+
         public static Move GetWinningMove(this Move move)
         {
             if (move.Equals(Moves.Rock))
