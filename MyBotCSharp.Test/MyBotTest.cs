@@ -102,5 +102,18 @@ namespace MyBotCSharp.Test
             Move actual = target.MakeMove(testPlayer, opponent, GameRules.Default);
             Assert.AreEqual(expected, actual, "Big Bang always starts with Dynamite.");
         }
+
+        [TestMethod()]
+        public void TestWhenCausingAnExceptionInMakeMyMove_ThenAValidMoveIsStillReturned()
+        {
+            var target = new MyBot_Accessor();
+            target.History = null;
+            var testPlayer = new Player("Test", target);
+
+            IPlayer opponent = new Player("Opponent", new MyBot());
+            Move notExpected = Moves.WaterBalloon;
+            Move actual = target.MakeMove(testPlayer, opponent, GameRules.Default);
+            Assert.AreNotEqual(notExpected, actual, "Exception move should not return WaterBalloon.");
+        }
     }
 }

@@ -187,5 +187,19 @@ namespace MyBotCSharp.Test
                 Assert.IsNotNull(player.Log, "Could not have logged if the log object is not instantiated");
             }
         }
+
+        /// <summary>
+        ///A test for GetWinningMove
+        ///</summary>
+        [TestMethod()]
+        public void TestWhenCallingGetWinningMoveForWaterBalloon_ThenNeitherWaterBalloonNorDynamiteAreReturned()
+        {
+            Move move = Moves.WaterBalloon;
+            Move notExpected = Moves.WaterBalloon;
+            Move actual = MyBotExtensions.GetWinningMove(move);
+            Assert.AreNotEqual(notExpected, actual, "GetWinningMove isn't treating WaterBalloon correctly.");
+            notExpected = Moves.Dynamite;
+            Assert.AreNotEqual(notExpected, actual, "GetWinningMove isn't treating WaterBalloon correctly.");
+        }
     }
 }

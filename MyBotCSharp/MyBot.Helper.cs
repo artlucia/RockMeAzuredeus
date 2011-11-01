@@ -37,10 +37,7 @@ namespace RockPaperAzure
         {
             if (you.Log == null) return;
 
-            if (args == null)
-                you.Log.AppendLine(message);
-            else
-                you.Log.AppendLine(String.Format(message, args));
+            you.Log.AppendLine(String.Format(message, args));
         }
 
         public static Move GetWinningMove(this Move move)
