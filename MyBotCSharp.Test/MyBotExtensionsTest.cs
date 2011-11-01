@@ -201,5 +201,30 @@ namespace MyBotCSharp.Test
             notExpected = Moves.Dynamite;
             Assert.AreNotEqual(notExpected, actual, "GetWinningMove isn't treating WaterBalloon correctly.");
         }
+
+        /// <summary>
+        ///A test for GetWaterBalloonMove
+        ///</summary>
+        [TestMethod()]
+        public void TestWhenCallingGetWaterBalloonMoveAgainstAnOpponentWithDynamite_ThenWaterBalloonIsReturned()
+        {
+            Player player = new Player("Opponent", new MyBot());
+            player.Reset(GameRules.Default);
+            Move expected = Moves.WaterBalloon;
+            Move actual = MyBotExtensions.GetWaterBalloonMove(player);
+            Assert.AreEqual(expected, actual, "There is dynamite to defend against.");
+        }
+
+        /// <summary>
+        ///A test for GetWaterBalloonMove
+        ///</summary>
+        [TestMethod()]
+        public void TestWhenCallingGetWaterBalloonMoveAgainstAnOpponentWithoutDynamite_ThenWaterBalloonIsNotReturned()
+        {
+            Player player = new Player("Opponent", new MyBot());
+            Move notExpected = Moves.WaterBalloon;
+            Move actual = MyBotExtensions.GetWaterBalloonMove(player);
+            Assert.AreNotEqual(notExpected, actual, "There is no dynamite to defend against.");
+        }
     }
 }

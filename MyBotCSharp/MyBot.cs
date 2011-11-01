@@ -57,6 +57,7 @@ namespace RockPaperAzure
             }
 
             if (yourMove.Equals(Moves.Dynamite)) yourMove = you.GetDynamiteMove();
+            else if (yourMove.Equals(Moves.WaterBalloon)) yourMove = opponent.GetWaterBalloonMove();
 
             you.LogLine("  BG: {0} and CC: {1} with {2} dynamite remaining.",
                 Analyzer.BestGuess.ToInitialString(),

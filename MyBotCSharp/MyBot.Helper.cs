@@ -24,6 +24,14 @@ namespace RockPaperAzure
             return Moves.GetRandomMove().GetWinningMove().GetWinningMove();
         }
 
+        public static Move GetWaterBalloonMove(this IPlayer player)
+        {
+            if (player.HasDynamite)
+                return Moves.WaterBalloon;
+
+            return Moves.GetRandomMove();
+        }
+
         public static void LogError(this IPlayer you, Exception e, string message = null)
         {
             string logMessage = "ERROR";
