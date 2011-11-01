@@ -7,6 +7,7 @@ namespace RockPaperAzure
     {
         internal List<Move> OpponentMoveHistory { get; private set; }
         internal List<Move> YourMoveHistory { get; private set; }
+        internal int ConsecutiveTies { get; private set; }
 
         internal MoveHistory()
         {
@@ -20,6 +21,11 @@ namespace RockPaperAzure
 
             OpponentMoveHistory.Add(opponent.LastMove);
             YourMoveHistory.Add(you.LastMove);
+
+            if (opponent.LastMove.Equals(you.LastMove))
+                ConsecutiveTies++;
+            else
+                ConsecutiveTies = 0;
         }
     }
 }
